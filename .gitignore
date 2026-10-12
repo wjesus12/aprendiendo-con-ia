@@ -1,0 +1,12 @@
+.DS_Store
+.netlify/
+node_modules/
+*.log
+__pycache__/
+.claude/
+
+# Material del autor (resumen de su capacitación presencial): no se publica
+docs/capacitacion-canvas.md
+
+# Archivos temporales de pruebas manuales
+tests/cuentas-prueba.md
