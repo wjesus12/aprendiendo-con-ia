@@ -1,4 +1,4 @@
-# Gemini Desde Cero — reglas del proyecto
+# Aprendiendo con IA · Guía práctica de Gemini — reglas del proyecto
 
 Portal estático para aprender Google Gemini desde cero, rumbo a las certificaciones **Gemini Certified Educator** y **Gemini Student Certification** (Google for Education). Autor: Wilmer Jesús Paucar Ayquipa.
 
@@ -22,6 +22,10 @@ Portal estático para aprender Google Gemini desde cero, rumbo a las certificaci
 - Preguntas: 4 opciones plausibles, una sola correcta, un «por qué» por opción. **Sesgo de longitud**: la correcta no puede superar en más de un 15 % a la incorrecta más larga (lo vigila el test). Para corregir, acorta la correcta o alarga los distractores (`tests/tools/fix.py` hace reemplazos exactos).
 - Las preguntas reales del examen son confidenciales: todas las del portal son **originales**.
 - No menciones la institución donde el autor dio su capacitación ni códigos de curso (lo vigila el test).
+
+## Nombre y aviso legal
+- Nombre visible: **Aprendiendo con IA · Guía práctica de Gemini** (no uses «Gemini» como nombre principal del portal).
+- El aviso legal (`js/content/legal.js`) dice que es un recurso independiente, no afiliado a Google, y atribuye las marcas. Está en `#/aviso-legal`, en el pie y plegado en la pantalla de acceso. No uses logos de Google.
 
 ## Cuentas
 - Portal de **uso libre**: no hay administrador. La pantalla de acceso ofrece **Crear cuenta** e **Iniciar sesión** (nombre + contraseña de 6+ caracteres, SHA-256 con sal).

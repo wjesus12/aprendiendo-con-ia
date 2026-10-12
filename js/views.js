@@ -133,11 +133,22 @@
   const soon = text => `<div class="soon sheet">${GDC.Mascot.svg({ size: 72, mood: 'think' })}<p>${text}</p></div>`;
 
   /* ---------- Contacto: solo el enlace a LinkedIn ---------- */
+  /* Logo oficial «in» de LinkedIn (forma y color sin modificar), usado solo para enlazar al perfil del autor */
+  const LINKEDIN_LOGO = `<svg class="contacto__logo" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="#0A66C2" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`;
+
+  /* ---------- Contacto: mensaje breve + LinkedIn del autor ---------- */
   function contacto() {
     return wrap('contacto', `
-      <div class="contacto__card sheet rise">
-        <a class="contacto__link" href="https://linkedin.com/in/wilmerjesuspaucar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <div class="contacto__box">
+        <p>¿Tienes alguna sugerencia para mejorar este entrenamiento?<br>Con mucho gusto puedes hacérmela llegar a:</p>
+        <a class="contacto__link" href="https://linkedin.com/in/wilmerjesuspaucar" target="_blank" rel="noopener noreferrer">${LINKEDIN_LOGO}<span>Wilmer Paucar</span></a>
       </div>`);
+  }
+
+  /* ---------- Aviso legal ---------- */
+  function legal() {
+    return wrap('legal', `<header class="page__head"><p class="kicker">Aviso legal</p><h1>Sobre este sitio</h1></header>
+      <div class="legal__text">${GDC.LEGAL.paras.map(p => `<p>${p}</p>`).join('')}</div>`);
   }
 
   /* ---------- Progreso ---------- */
@@ -241,7 +252,7 @@
       const a = e.target.closest('[data-act]')?.dataset.act;
       if (a === 'theme') { GDC.App.toggleTheme(); GDC.App.route(); }
       if (a === 'motion') { GDC.App.setMotion(!u.prefs.motion); GDC.App.route(); }
-      if (a === 'export') GDC.download(`gemini-desde-cero-${u.name}-${GDC.today()}.json`, GDC.Store.exportUser(u.id));
+      if (a === 'export') GDC.download(`aprendiendo-con-ia-${u.name}-${GDC.today()}.json`, GDC.Store.exportUser(u.id));
       if (a === 'delete' && confirm(`¿Eliminar la cuenta «${u.name}» y todo su progreso de este navegador? No se puede deshacer.`)) {
         GDC.Store.remove(u.id);
         GDC.toast('Cuenta eliminada de este navegador.', 'info');
@@ -271,6 +282,6 @@
   }
 
   GDC.Views = {
-    home, ruta, modulo, contacto, progreso, ajustes, notFound,
+    home, ruta, modulo, contacto, legal, progreso, ajustes, notFound,
   };
 })();

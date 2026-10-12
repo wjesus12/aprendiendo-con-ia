@@ -1,4 +1,4 @@
-# Gemini Desde Cero
+# Aprendiendo con IA · Guía práctica de Gemini
 
 Portal interactivo para aprender **Google Gemini** desde cero hasta nivel experto, rumbo a las certificaciones de Google for Education **Gemini Certified Educator** y **Gemini Student Certification**. Está pensado para quien nunca ha escrito un prompt.
 

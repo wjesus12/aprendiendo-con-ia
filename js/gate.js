@@ -16,8 +16,8 @@
       <div class="gate__wrap">
         <div class="gate__hero">
           <div class="gate__mascot rise">${GDC.Mascot.svg({ size: 170, cls: 'is-float' })}</div>
-          <p class="gate__kicker mono rise" style="--i:1">Google Gemini · de cero a experto</p>
-          <h1 class="gate__title rise" style="--i:2">Gemini<br><span class="ink-spark">Desde Cero</span></h1>
+          <p class="gate__kicker mono rise" style="--i:1">Guía práctica de Gemini · de cero a experto</p>
+          <h1 class="gate__title rise" style="--i:2">Aprendiendo<br><span class="ink-spark">con IA</span></h1>
           <p class="gate__lede rise" style="--i:3">Aprende a usar Gemini y sus herramientas aunque nunca hayas escrito un prompt. Canvas, Gems, Nano Banana, Gemini Notebook, Docs, Slides, Sheets y Drive, rumbo a las certificaciones <b>Gemini Certified Educator</b> y <b>Student</b>.</p>
           <ul class="gate__chips rise" style="--i:4">
             <li class="chip chip--spark">Gratis y abierto</li><li class="chip">26 módulos</li><li class="chip">ES · EN · EN+ES</li><li class="chip">Labs y simulacros</li>
@@ -29,10 +29,11 @@
             <button type="button" role="tab" data-tab="login">Iniciar sesión</button>
           </div>
           <div class="gate__privacy" role="note">
-            <span class="gate__privacyicon" aria-hidden="true">🔒</span>
-            <p><b>Tu información no se envía a ninguna base de datos.</b> Tu cuenta y tu progreso se guardan únicamente en este navegador, en tu propio equipo. Nadie más puede verlos, y si cambias de equipo o borras los datos del navegador, tendrás que crear la cuenta otra vez (o usar un respaldo).</p>
+            <svg class="gate__privacyicon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 11.8l2.1 2.1L15.2 9.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p><b>Tus datos se quedan en tu equipo.</b> Tu cuenta se guarda solo en este navegador y no se envía a ninguna base de datos.</p>
           </div>
           <div id="gateForm"></div>
+          <details class="gate__legal"><summary>${GDC.LEGAL.short} <span>Aviso legal</span></summary>${GDC.LEGAL.paras.map(p => `<p>${p}</p>`).join('')}</details>
         </div>
       </div>`;
 

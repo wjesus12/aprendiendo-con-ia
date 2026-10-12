@@ -14,7 +14,8 @@
     [/^#\/simulacro$/, () => GDC.Exam.view(), 'simulacro'],
     [/^#\/progreso$/, () => GDC.Views.progreso(), 'progreso'],
     [/^#\/ajustes$/, () => GDC.Views.ajustes(), 'ajustes'],
-    [/^#\/contacto$/, () => GDC.Views.contacto(), 'contacto']
+    [/^#\/contacto$/, () => GDC.Views.contacto(), 'contacto'],
+    [/^#\/aviso-legal$/, () => GDC.Views.legal(), 'aviso-legal']
   ];
 
   /* Menú de opciones (barra superior) */
@@ -64,8 +65,8 @@
     const lv = GDC.G.level(u.progress.xp);
     const bar = GDC.$('#topbar');
     bar.innerHTML = `
-      <a class="brand" href="#/inicio" aria-label="Gemini Desde Cero, inicio">
-        ${GDC.Mascot.svg({ size: 34 })}<span class="brand__t">Gemini <b class="ink-spark">Desde Cero</b></span>
+      <a class="brand" href="#/inicio" aria-label="Aprendiendo con IA, inicio">
+        ${GDC.Mascot.svg({ size: 34 })}<span class="brand__t">Aprendiendo <b class="ink-spark">con IA</b></span>
       </a>
       <nav class="nav" id="nav" aria-label="Opciones">
         <ul class="nav__list">
@@ -86,7 +87,7 @@
         </details>
         <button class="tools__b burger" type="button" data-act="menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
       </div>`;
-    GDC.$('#foot').innerHTML = `<p>Gemini Desde Cero · portal independiente, no afiliado a Google. Datos verificados el ${GDC.DATA.verificado}. «Gemini» y los nombres de producto pertenecen a Google LLC.</p>`;
+    GDC.$('#foot').innerHTML = `<p>Aprendiendo con IA · Guía práctica de Gemini — recurso educativo independiente, no afiliado a Google. «Gemini» y los nombres de producto son marcas de Google LLC. Datos verificados el ${GDC.DATA.verificado}. <a href="#/aviso-legal">Aviso legal</a></p>`;
   }
 
   function onChromeClick(e) {

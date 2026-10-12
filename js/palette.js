@@ -16,6 +16,7 @@
       { k: '/progreso', d: 'Tu progreso y logros', run: go('#/progreso') },
       { k: '/ajustes', d: 'Ajustes y respaldo', run: go('#/ajustes') },
       { k: '/contacto', d: 'Contacto', run: go('#/contacto') },
+      { k: '/aviso', d: 'Aviso legal', run: go('#/aviso-legal') },
       { k: '/tema', d: 'Cambiar tema claro / oscuro', run: () => GDC.App.toggleTheme() },
       { k: '/es', d: 'Contenido en español', run: () => GDC.App.setLang('es') },
       { k: '/en', d: 'Contenido en inglés', run: () => GDC.App.setLang('en') },

@@ -2,7 +2,7 @@
    Hash SHA-256 con sal. Todo vive en localStorage de este navegador: no hay servidor ni base de datos.
    No existe rol de administrador (las cuentas «admin» antiguas se tratan como cuentas normales). */
 (function () {
-  const APP = 'gemini-desde-cero';
+  const APP = 'gemini-desde-cero';   /* identificador interno de los respaldos: no cambiar (compatibilidad) */
   const KEY = 'gdc.v1';
   const SESSION = 'gdc.session';
 
@@ -111,7 +111,7 @@
       const u = db.users[id]; if (!u) throw new Error('Inicia sesión antes de importar.');
       let data;
       try { data = JSON.parse(text); } catch (e) { throw new Error('El archivo no es un JSON válido.'); }
-      if (data.app !== APP || data.kind !== 'profile' || !data.user?.progress) throw new Error('El archivo no es un respaldo de progreso de Gemini Desde Cero.');
+      if (data.app !== APP || data.kind !== 'profile' || !data.user?.progress) throw new Error('El archivo no es un respaldo de progreso de Aprendiendo con IA.');
       u.progress = Object.assign(freshProgress(), data.user.progress); save();
       return u.name;
     },

@@ -46,10 +46,16 @@
 .gate__tabs button.is-on { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
 
 /* Aviso de privacidad, siempre encima de los campos */
-.gate__privacy { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 16px; padding: 12px 14px; border-radius: var(--r-m); background: var(--ok-soft); border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent); }
+.gate__privacy { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; padding: 10px 12px; border-radius: var(--r-m); background: var(--paper-2); border: 1px solid var(--rule); }
 .gate__privacy p { margin: 0; font-size: .88rem; line-height: 1.5; color: var(--ink-2); }
 .gate__privacy b { color: var(--ink); }
-.gate__privacyicon { font-size: 1.2rem; line-height: 1.2; }
+.gate__privacyicon { flex-shrink: 0; color: var(--ok); }
+/* Aviso legal plegado bajo el formulario */
+.gate__legal { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); font-size: .8rem; color: var(--ink-3); }
+.gate__legal summary { cursor: pointer; list-style: none; }
+.gate__legal summary::-webkit-details-marker { display: none; }
+.gate__legal summary span { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; margin-left: 4px; }
+.gate__legal p { margin: 8px 0 0; line-height: 1.5; }
 
 /* Accesos rápidos a cuentas existentes en este navegador */
 .gate__quick { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
