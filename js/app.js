@@ -14,8 +14,7 @@
     [/^#\/simulacro$/, () => GDC.Exam.view(), 'simulacro'],
     [/^#\/progreso$/, () => GDC.Views.progreso(), 'progreso'],
     [/^#\/ajustes$/, () => GDC.Views.ajustes(), 'ajustes'],
-    [/^#\/contacto$/, () => GDC.Views.contacto(), 'contacto'],
-    [/^#\/admin$/, () => GDC.Admin.view(), 'admin']
+    [/^#\/contacto$/, () => GDC.Views.contacto(), 'contacto']
   ];
 
   /* Menú de opciones (barra superior) */
@@ -71,7 +70,6 @@
       <nav class="nav" id="nav" aria-label="Opciones">
         <ul class="nav__list">
           ${NAV.map(([id, href, label]) => `<li><a class="nav__a${id === current ? ' is-on' : ''}" href="${href}" ${id === current ? 'aria-current="page"' : ''}>${label}</a></li>`).join('')}
-          ${u.role === 'admin' ? `<li><a class="nav__a${current === 'admin' ? ' is-on' : ''}" href="#/admin">Admin</a></li>` : ''}
         </ul>
       </nav>
       <div class="tools">
@@ -83,7 +81,6 @@
           <div class="me__menu">
             <p class="me__name"><b>${GDC.esc(u.name)}</b><br><small>Nivel ${lv.n} · ${GDC.esc(lv.name)}</small></p>
             <a href="#/ajustes">Ajustes</a>
-            ${u.role === 'admin' ? '<a href="#/admin">Administración</a>' : ''}
             <button type="button" data-act="logout">Cerrar sesión</button>
           </div>
         </details>
@@ -154,6 +151,8 @@
   }
 
   function boot() {
+    /* Cada vista empieza arriba: el navegador no debe restaurar el desplazamiento de la visita anterior */
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
     applyPrefs();
     document.addEventListener('click', onChromeClick);
     window.addEventListener('hashchange', route);

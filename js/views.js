@@ -220,17 +220,21 @@
           <button class="btn" type="button" data-act="motion">Animaciones: ${u.prefs.motion ? 'sí' : 'reducidas'}</button></div>
           <p class="muted">Si tu sistema pide «reducir movimiento», el portal lo respeta siempre.</p>
         </section>
-        <section class="sheet"><h2>${u.role === 'admin' ? 'Contraseña' : 'PIN'}</h2>
+        <section class="sheet"><h2>Contraseña</h2>
           <form class="gform" id="fSecret">
-            <label class="field"><span>Nuevo ${u.role === 'admin' ? 'contraseña (mín. 6)' : 'PIN (mín. 4 dígitos)'}</span>
-              <input name="s" type="password" required ${u.role === 'admin' ? 'minlength="6"' : 'minlength="4" inputmode="numeric" pattern="[0-9]*"'} autocomplete="new-password"></label>
-            <button class="btn btn--primary">Cambiar</button>
+            <label class="field"><span>Contraseña actual</span><input name="old" type="password" required autocomplete="current-password"></label>
+            <label class="field"><span>Nueva contraseña (mínimo 6 caracteres)</span><input name="s" type="password" required minlength="6" autocomplete="new-password"></label>
+            <button class="btn btn--primary">Cambiar contraseña</button>
           </form>
         </section>
         <section class="sheet"><h2>Respaldo de tu progreso</h2>
-          <p class="muted">Tu progreso vive solo en este navegador. Descárgalo para no perderlo o para llevarlo a otro equipo.</p>
+          <p class="muted">🔒 Tu cuenta y tu progreso viven solo en este navegador: no se envían a ninguna base de datos. Descarga un respaldo para no perderlo o para llevarlo a otro equipo (allí crea tu cuenta e impórtalo).</p>
           <div class="row"><button class="btn" type="button" data-act="export">Descargar respaldo (.json)</button>
           <label class="btn">Importar respaldo<input type="file" accept="application/json,.json" data-act="import" hidden></label></div>
+        </section>
+        <section class="sheet"><h2>Eliminar mi cuenta</h2>
+          <p class="muted">Borra tu cuenta y todo tu progreso de este navegador. No se puede deshacer; si quieres conservarlo, descarga antes un respaldo.</p>
+          <button class="btn btn--danger" type="button" data-act="delete">Eliminar mi cuenta de este navegador</button>
         </section>
       </div>`);
     el.addEventListener('click', e => {
@@ -238,17 +242,25 @@
       if (a === 'theme') { GDC.App.toggleTheme(); GDC.App.route(); }
       if (a === 'motion') { GDC.App.setMotion(!u.prefs.motion); GDC.App.route(); }
       if (a === 'export') GDC.download(`gemini-desde-cero-${u.name}-${GDC.today()}.json`, GDC.Store.exportUser(u.id));
+      if (a === 'delete' && confirm(`¿Eliminar la cuenta «${u.name}» y todo su progreso de este navegador? No se puede deshacer.`)) {
+        GDC.Store.remove(u.id);
+        GDC.toast('Cuenta eliminada de este navegador.', 'info');
+        GDC.App.logout();
+      }
     });
     el.addEventListener('change', e => {
       if (e.target.dataset.act !== 'import' || !e.target.files[0]) return;
       e.target.files[0].text().then(t => {
-        try { const r = GDC.Store.importAll(t); GDC.toast(r === 'all' ? 'Respaldo completo restaurado.' : `Progreso de ${r} restaurado.`, 'ok'); GDC.App.route(); }
+        if (!confirm('Esto reemplaza tu progreso actual por el del respaldo. ¿Continuar?')) return;
+        try { GDC.Store.importInto(u.id, t); GDC.toast('Progreso restaurado.', 'ok'); GDC.App.route(); }
         catch (x) { GDC.toast(x.message, 'bad', 5000); }
       });
     });
     el.querySelector('#fSecret').addEventListener('submit', e => {
       e.preventDefault();
-      try { GDC.Store.setSecret(u.id, new FormData(e.target).get('s')); e.target.reset(); GDC.toast('Actualizado.', 'ok'); }
+      const fd = new FormData(e.target);
+      if (!GDC.Store.verify(u.id, fd.get('old'))) { GDC.toast('La contraseña actual no es correcta.', 'bad'); return; }
+      try { GDC.Store.setSecret(u.id, fd.get('s')); e.target.reset(); GDC.toast('Contraseña actualizada.', 'ok'); }
       catch (x) { GDC.toast(x.message, 'bad'); }
     });
     return el;

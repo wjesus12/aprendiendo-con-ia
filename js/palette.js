@@ -4,7 +4,6 @@
   const go = h => () => { location.hash = h; };
 
   function commands() {
-    const admin = GDC.Store.current()?.role === 'admin';
     const list = [
       { k: '/inicio', d: 'Ir al inicio', run: go('#/inicio') },
       { k: '/ruta', d: 'Ruta desde cero (26 módulos)', run: go('#/ruta') },
@@ -23,7 +22,6 @@
       { k: '/bi', d: 'Contenido EN+ES (puente)', run: () => GDC.App.setLang('bi') },
       { k: '/salir', d: 'Cerrar sesión', run: () => GDC.App.logout() }
     ];
-    if (admin) list.splice(10, 0, { k: '/admin', d: 'Panel de administración', run: go('#/admin') });
     return list;
   }
 

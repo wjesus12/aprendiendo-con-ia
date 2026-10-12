@@ -1,10 +1,13 @@
-/* Pantalla de acceso: alta del admin (primer uso) o elección de perfil + PIN/contraseña. */
+/* Pantalla de acceso de uso libre: cada persona crea su propia cuenta local o inicia sesión.
+   No hay administrador. Los datos se guardan solo en el navegador (localStorage), nunca en un servidor. */
 (function () {
   const esc = GDC.esc;
+  let tab = 'signup';
 
   function render() {
     const gate = GDC.$('#gate');
     gate.hidden = false;
+    tab = GDC.Store.users().length ? 'login' : 'signup';
     gate.innerHTML = `
       <div class="gate__theme" role="radiogroup" aria-label="Tema">
         <button type="button" role="radio" data-theme-pick="light">☀️ Claro</button>
@@ -17,14 +20,22 @@
           <h1 class="gate__title rise" style="--i:2">Gemini<br><span class="ink-spark">Desde Cero</span></h1>
           <p class="gate__lede rise" style="--i:3">Aprende a usar Gemini y sus herramientas aunque nunca hayas escrito un prompt. Canvas, Gems, Nano Banana, Gemini Notebook, Docs, Slides, Sheets y Drive, rumbo a las certificaciones <b>Gemini Certified Educator</b> y <b>Student</b>.</p>
           <ul class="gate__chips rise" style="--i:4">
-            <li class="chip chip--spark">26 módulos</li><li class="chip">ES · EN · EN+ES</li><li class="chip">Labs y simulacros</li>
+            <li class="chip chip--spark">Gratis y abierto</li><li class="chip">26 módulos</li><li class="chip">ES · EN · EN+ES</li><li class="chip">Labs y simulacros</li>
           </ul>
         </div>
         <div class="gate__card sheet rise" style="--i:2">
-          <p class="gate__hello" id="gHello" aria-live="polite"></p>
+          <div class="gate__tabs" role="tablist" aria-label="Acceso">
+            <button type="button" role="tab" data-tab="signup">Crear cuenta</button>
+            <button type="button" role="tab" data-tab="login">Iniciar sesión</button>
+          </div>
+          <div class="gate__privacy" role="note">
+            <span class="gate__privacyicon" aria-hidden="true">🔒</span>
+            <p><b>Tu información no se envía a ninguna base de datos.</b> Tu cuenta y tu progreso se guardan únicamente en este navegador, en tu propio equipo. Nadie más puede verlos, y si cambias de equipo o borras los datos del navegador, tendrás que crear la cuenta otra vez (o usar un respaldo).</p>
+          </div>
           <div id="gateForm"></div>
         </div>
       </div>`;
+
     const markTheme = () => GDC.$$('[data-theme-pick]', gate).forEach(b => {
       const on = b.dataset.themePick === document.documentElement.dataset.theme;
       b.classList.toggle('is-on', on); b.setAttribute('aria-checked', String(on));
@@ -35,71 +46,74 @@
       if (b.dataset.themePick !== document.documentElement.dataset.theme) GDC.App.toggleTheme();
       markTheme();
     });
-    const hello = GDC.Store.hasAdmin() ? 'Hola de nuevo. ¿Quién va a aprender hoy?' : 'Hola. Empecemos por crear la cuenta administradora.';
-    GDC.type(GDC.$('#gHello'), hello, 18).then(() => {
-      if (!GDC.$('#gateForm')) return;
-      GDC.Store.hasAdmin() ? profiles() : firstRun();
+    gate.querySelector('.gate__tabs').addEventListener('click', e => {
+      const b = e.target.closest('[data-tab]'); if (!b) return;
+      tab = b.dataset.tab; draw();
     });
+    draw();
   }
 
-  function firstRun() {
+  function draw() {
+    GDC.$$('.gate__tabs [data-tab]').forEach(b => {
+      const on = b.dataset.tab === tab;
+      b.classList.toggle('is-on', on); b.setAttribute('aria-selected', String(on));
+    });
+    tab === 'signup' ? signup() : login();
+  }
+
+  function signup() {
     const f = GDC.$('#gateForm');
     f.innerHTML = `
-      <p class="gate__note">La cuenta admin crea perfiles de estudiante (con PIN), ve el progreso de todos y exporta respaldos. Todo se guarda solo en este navegador.</p>
-      <form id="fAdmin" class="gform">
-        <label class="field"><span>Tu nombre</span><input name="name" required maxlength="32" autocomplete="username" placeholder="p. ej. Wilmer"></label>
+      <form id="fSignup" class="gform" novalidate>
+        <label class="field"><span>Tu nombre o apodo</span><input name="name" required maxlength="32" autocomplete="username" placeholder="p. ej. Ana"></label>
         <label class="field"><span>Contraseña (mínimo 6 caracteres)</span><input name="p1" type="password" required minlength="6" autocomplete="new-password"></label>
         <label class="field"><span>Repite la contraseña</span><input name="p2" type="password" required minlength="6" autocomplete="new-password"></label>
         <p class="gform__err" id="gErr" role="alert"></p>
-        <button class="btn btn--spark btn--block">Crear admin y entrar</button>
+        <button class="btn btn--spark btn--block">Crear mi cuenta y empezar</button>
+        <p class="gate__note">¿Ya tienes una cuenta en este navegador? <button type="button" class="linkbtn" data-tab-go="login">Inicia sesión</button></p>
       </form>`;
-    GDC.$('#fAdmin').addEventListener('submit', e => {
+    f.querySelector('[data-tab-go]').addEventListener('click', () => { tab = 'login'; draw(); });
+    GDC.$('#fSignup').addEventListener('submit', e => {
       e.preventDefault();
       const fd = new FormData(e.target);
-      if (fd.get('p1') !== fd.get('p2')) return err('Las contraseñas no coinciden.');
+      if (String(fd.get('p1')) !== String(fd.get('p2'))) return err('Las contraseñas no coinciden.');
       try {
-        const u = GDC.Store.createUser({ name: fd.get('name'), secret: fd.get('p1'), role: 'admin', hue: 255 });
+        const u = GDC.Store.createUser({ name: fd.get('name'), secret: fd.get('p1') });
         GDC.Store.login(u.id);
         GDC.App.enter(true);
       } catch (x) { err(x.message); }
     });
-    GDC.$('#fAdmin input').focus();
+    f.querySelector('input').focus({ preventScroll: true });
   }
 
-  function profiles() {
+  function login() {
     const f = GDC.$('#gateForm');
     const us = GDC.Store.users();
     f.innerHTML = `
-      <ul class="plist" aria-label="Perfiles">
-        ${us.map(u => `<li><button type="button" class="plist__row" data-id="${u.id}">
-            <span class="avatar" style="--h:${u.hue}">${esc(u.name.slice(0, 1).toUpperCase())}</span>
-            <span class="plist__name">${esc(u.name)}</span>
-            <span class="plist__meta">${u.role === 'admin' ? 'admin' : GDC.G.level(u.progress.xp).name}</span>
-          </button></li>`).join('')}
-      </ul>
-      <div id="pinBox"></div>
-      <p class="gate__note">¿No ves tu nombre? Pide a la persona administradora que cree tu perfil.</p>`;
-    f.addEventListener('click', e => { const b = e.target.closest('.plist__row'); if (b) askSecret(b.dataset.id); });
-    if (us.length === 1) askSecret(us[0].id);
-  }
-
-  function askSecret(id) {
-    const u = GDC.Store.get(id);
-    GDC.$$('.plist__row').forEach(b => b.classList.toggle('is-picked', b.dataset.id === id));
-    const isAdmin = u.role === 'admin';
-    const box = GDC.$('#pinBox');
-    box.innerHTML = `<form id="fPin" class="gform gform--row">
-        <label class="field field--grow"><span>${isAdmin ? 'Contraseña' : 'PIN'} de ${esc(u.name)}</span>
-          <input name="s" type="password" required autocomplete="current-password" ${isAdmin ? '' : 'inputmode="numeric" pattern="[0-9]*"'}></label>
-        <button class="btn btn--primary">Entrar</button>
-      </form><p class="gform__err" id="gErr" role="alert"></p>`;
-    const inp = box.querySelector('input');
-    inp.focus();
-    GDC.$('#fPin').addEventListener('submit', e => {
-      e.preventDefault();
-      if (GDC.Store.verify(id, inp.value)) { GDC.Store.login(id); GDC.App.enter(false); }
-      else { err('No coincide. Inténtalo de nuevo.'); inp.select(); GDC.Mascot.react('oops', GDC.$('.gate__mascot .chispa')); }
+      <form id="fLogin" class="gform" novalidate>
+        ${us.length ? `<div class="gate__quick"><span class="gate__quickl">Cuentas en este navegador:</span>
+          ${us.map(u => `<button type="button" class="plist__chip" data-name="${esc(u.name)}"><span class="avatar avatar--s" style="--h:${u.hue}">${esc(u.name.slice(0, 1).toUpperCase())}</span>${esc(u.name)}</button>`).join('')}</div>` : ''}
+        <label class="field"><span>Tu nombre o apodo</span><input name="name" required maxlength="32" autocomplete="username"></label>
+        <label class="field"><span>Contraseña</span><input name="s" type="password" required autocomplete="current-password"></label>
+        <p class="gform__err" id="gErr" role="alert"></p>
+        <button class="btn btn--primary btn--block">Entrar</button>
+        <p class="gate__note">¿Primera vez aquí? <button type="button" class="linkbtn" data-tab-go="signup">Crea tu cuenta</button></p>
+      </form>`;
+    const name = f.querySelector('[name="name"]'), pass = f.querySelector('[name="s"]');
+    f.querySelector('[data-tab-go]').addEventListener('click', () => { tab = 'signup'; draw(); });
+    f.addEventListener('click', e => {
+      const c = e.target.closest('.plist__chip'); if (!c) return;
+      name.value = c.dataset.name; pass.focus();
     });
+    GDC.$('#fLogin').addEventListener('submit', e => {
+      e.preventDefault();
+      const u = GDC.Store.findByName(name.value);
+      if (u && GDC.Store.verify(u.id, pass.value)) { GDC.Store.login(u.id); GDC.App.enter(false); return; }
+      err('El nombre o la contraseña no coinciden con ninguna cuenta de este navegador.');
+      pass.select();
+      GDC.Mascot.react('oops', GDC.$('.gate__mascot .chispa'));
+    });
+    (us.length === 1 ? (name.value = us[0].name, pass) : name).focus({ preventScroll: true });
   }
 
   function err(m) { const e = GDC.$('#gErr'); if (e) e.textContent = m; }

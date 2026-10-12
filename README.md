@@ -26,7 +26,7 @@ Los nombres de producto (Canvas, Gems, Deep Research…) se mantienen en inglés
 | **Simulacros** | Educator: 37 preguntas y 120 minutos (12/13/12 por dominio). Student: 30 preguntas y 60 minutos. Con cronómetro, marcado para revisar, mapa de preguntas y revisión final |
 | **Flashcards** | Repaso espaciado (SM-2) sobre el glosario |
 | **Progreso** | XP, niveles, racha, logros, aciertos por dominio, temas débiles y brecha de idioma |
-| **Cuentas locales** | Un administrador con contraseña y estudiantes con PIN (SHA-256 con sal), con exportación e importación en JSON |
+| **Cuentas locales** | De uso libre: cada persona crea su propia cuenta con nombre y contraseña (SHA-256 con sal). La información **no se envía a ninguna base de datos**: se guarda solo en el navegador. Incluye respaldo en JSON, cambio de contraseña y «Eliminar mi cuenta» |
 
 Incluye a **Chispa**, una mascota animada que se puede arrastrar por la pantalla y que da consejos.
 
@@ -40,7 +40,7 @@ Es un sitio estático, sin compilación ni dependencias. Basta con servir la car
 python3 -m http.server 8870
 ```
 
-Después abre `http://localhost:8870`. La primera vez se crea la cuenta de administrador, y desde **Admin** se dan de alta los estudiantes. Todo se guarda en el `localStorage` del navegador; para respaldar o mover el progreso, usa **Admin → Exportar todo** o **Ajustes → Descargar respaldo**.
+Después abre `http://localhost:8870`. Al entrar puedes **crear una cuenta** o **iniciar sesión**; no hay administrador. Todo se guarda en el `localStorage` del navegador y nunca se envía a un servidor. Para respaldar o mover el progreso a otro equipo, usa **Ajustes → Descargar respaldo** y, en el otro equipo, crea tu cuenta e **importa** el respaldo.
 
 Atajos: pulsa `/` o `Ctrl/⌘ + K` para abrir la barra de comandos.
 

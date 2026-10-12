@@ -1,5 +1,6 @@
-/* Persistencia local: una cuenta admin (contraseña) + estudiantes (PIN).
-   Hash SHA-256 con sal. Todo vive en localStorage de este navegador; no hay servidor. */
+/* Persistencia local de uso libre: cada persona crea su propia cuenta (nombre + contraseña).
+   Hash SHA-256 con sal. Todo vive en localStorage de este navegador: no hay servidor ni base de datos.
+   No existe rol de administrador (las cuentas «admin» antiguas se tratan como cuentas normales). */
 (function () {
   const APP = 'gemini-desde-cero';
   const KEY = 'gdc.v1';
@@ -43,26 +44,23 @@
   const salt = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
   const hash = (secret, s) => GDC.sha256(s + '::' + secret);
 
-  const minLen = role => role === 'admin' ? 6 : 4;
+  const MIN = 6;
+  const norm = n => String(n || '').trim().toLowerCase();
 
   const Store = {
     APP,
-    hasAdmin() { return Object.values(db.users).some(u => u.role === 'admin'); },
-    users() {
-      return Object.values(db.users).sort((a, b) =>
-        (a.role === 'admin' ? -1 : 0) - (b.role === 'admin' ? -1 : 0) || a.created - b.created);
-    },
+    users() { return Object.values(db.users).sort((a, b) => (b.lastLogin || b.created) - (a.lastLogin || a.created)); },
     get(id) { return db.users[id] || null; },
+    findByName(name) { return Object.values(db.users).find(u => norm(u.name) === norm(name)) || null; },
 
-    createUser({ name, secret, role = 'student', hue }) {
+    createUser({ name, secret, hue }) {
       name = String(name || '').trim().slice(0, 32);
-      if (!name) throw new Error('El nombre es obligatorio.');
-      if (Object.values(db.users).some(u => u.name.toLowerCase() === name.toLowerCase())) throw new Error('Ya existe un perfil con ese nombre.');
-      if (!secret || String(secret).length < minLen(role)) throw new Error(role === 'admin' ? 'La contraseña del admin necesita al menos 6 caracteres.' : 'El PIN necesita al menos 4 dígitos.');
-      if (role !== 'admin' && !/^\d+$/.test(String(secret))) throw new Error('El PIN solo admite números.');
+      if (!name) throw new Error('Escribe tu nombre o apodo.');
+      if (Store.findByName(name)) throw new Error('Ya hay una cuenta con ese nombre en este navegador. Elige otro o inicia sesión.');
+      if (!secret || String(secret).length < MIN) throw new Error('La contraseña necesita al menos 6 caracteres.');
       const s = salt();
       const u = {
-        id: uid(), name, role, salt: s, hash: hash(String(secret), s),
+        id: uid(), name, role: 'user', salt: s, hash: hash(String(secret), s),
         hue: hue ?? Math.floor(200 + Math.random() * 140),
         created: Date.now(), lastLogin: null,
         prefs: { theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light', lang: 'es', motion: true },
@@ -74,14 +72,14 @@
     verify(id, secret) { const u = db.users[id]; return !!u && hash(String(secret), u.salt) === u.hash; },
     setSecret(id, secret) {
       const u = db.users[id]; if (!u) return;
-      if (!secret || String(secret).length < minLen(u.role)) throw new Error('Demasiado corto.');
-      if (u.role !== 'admin' && !/^\d+$/.test(String(secret))) throw new Error('El PIN solo admite números.');
+      if (!secret || String(secret).length < MIN) throw new Error('La contraseña necesita al menos 6 caracteres.');
       u.salt = salt(); u.hash = hash(String(secret), u.salt); save();
     },
+    /* Cada persona puede borrar su propia cuenta de este navegador */
     remove(id) {
-      const u = db.users[id];
-      if (!u || u.role === 'admin') throw new Error('La cuenta admin no se puede borrar.');
+      if (!db.users[id]) return;
       delete db.users[id]; save();
+      if (Store.current() === null) Store.logout();
     },
     resetProgress(id) { const u = db.users[id]; if (u) { u.progress = freshProgress(); save(); } },
 
@@ -103,23 +101,19 @@
     pref(k) { return Store.current()?.prefs[k]; },
     setPref(k, v) { const u = Store.current(); if (u) { u.prefs[k] = v; save(); } },
 
-    /* respaldos */
-    exportAll() { return JSON.stringify({ app: APP, exported: new Date().toISOString(), db }, null, 2); },
+    /* respaldos: cada persona exporta su progreso (sin contraseña) y lo importa en su cuenta actual */
     exportUser(id) {
       const u = db.users[id]; if (!u) return null;
       const { hash: _h, salt: _s, ...pub } = u;
       return JSON.stringify({ app: APP, kind: 'profile', exported: new Date().toISOString(), user: pub }, null, 2);
     },
-    importAll(text) {
-      const data = JSON.parse(text);
-      if (data.app !== APP) throw new Error('El archivo no es un respaldo de Gemini Desde Cero.');
-      if (data.db && data.db.users) { db = data.db; save(); return 'all'; }
-      if (data.kind === 'profile' && data.user) {
-        const existing = Object.values(db.users).find(x => x.name.toLowerCase() === data.user.name.toLowerCase());
-        if (!existing) throw new Error('No existe un perfil llamado «' + data.user.name + '». Créalo primero y vuelve a importar.');
-        existing.progress = Object.assign(freshProgress(), data.user.progress); save(); return existing.name;
-      }
-      throw new Error('Formato no reconocido.');
+    importInto(id, text) {
+      const u = db.users[id]; if (!u) throw new Error('Inicia sesión antes de importar.');
+      let data;
+      try { data = JSON.parse(text); } catch (e) { throw new Error('El archivo no es un JSON válido.'); }
+      if (data.app !== APP || data.kind !== 'profile' || !data.user?.progress) throw new Error('El archivo no es un respaldo de progreso de Gemini Desde Cero.');
+      u.progress = Object.assign(freshProgress(), data.user.progress); save();
+      return u.name;
     },
     wipe() { db = blank(); save(); Store.logout(); },
     freshProgress

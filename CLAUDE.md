@@ -23,6 +23,11 @@ Portal estático para aprender Google Gemini desde cero, rumbo a las certificaci
 - Las preguntas reales del examen son confidenciales: todas las del portal son **originales**.
 - No menciones la institución donde el autor dio su capacitación ni códigos de curso (lo vigila el test).
 
+## Cuentas
+- Portal de **uso libre**: no hay administrador. La pantalla de acceso ofrece **Crear cuenta** e **Iniciar sesión** (nombre + contraseña de 6+ caracteres, SHA-256 con sal).
+- Encima de los campos debe verse el aviso de que la información **no se envía a ninguna base de datos** y se guarda solo en el navegador (lo vigila el test).
+- Cada persona gestiona su cuenta en Ajustes: cambiar contraseña, respaldo JSON (sin hash) y «Eliminar mi cuenta».
+
 ## Identidad visual
 - Estética «cuaderno de laboratorio», temas claro y oscuro (tokens en `css/base.css`), respeta `prefers-reduced-motion`.
 - Mascota **Chispa** (`js/mascot.js`): estrella de cuatro puntas con cara. Paleta pedida por el autor: azul profundo `#1f5fe0` → azul cielo `#3aa0f5` → violeta `#7a5cf0` → amarillo oscuro `#c9921a` (sin rosa). Es arrastrable y da tips de `js/content/tips.js` (bilingües, en mazo sin repetir).

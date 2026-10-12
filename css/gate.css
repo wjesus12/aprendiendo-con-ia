@@ -39,3 +39,21 @@
 .gate__theme { position: absolute; top: 16px; right: var(--gutter); z-index: 2; display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--rule); }
 .gate__theme button { min-height: 34px; padding: 0 .9em; border: 0; border-radius: 999px; background: transparent; color: var(--ink-3); font-size: .85rem; font-weight: 500; }
 .gate__theme button.is-on { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+
+/* Pestañas Crear cuenta / Iniciar sesión */
+.gate__tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin-bottom: 14px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--rule); }
+.gate__tabs button { min-height: 40px; border: 0; border-radius: 999px; background: transparent; color: var(--ink-3); font-weight: 600; }
+.gate__tabs button.is-on { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+
+/* Aviso de privacidad, siempre encima de los campos */
+.gate__privacy { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 16px; padding: 12px 14px; border-radius: var(--r-m); background: var(--ok-soft); border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent); }
+.gate__privacy p { margin: 0; font-size: .88rem; line-height: 1.5; color: var(--ink-2); }
+.gate__privacy b { color: var(--ink); }
+.gate__privacyicon { font-size: 1.2rem; line-height: 1.2; }
+
+/* Accesos rápidos a cuentas existentes en este navegador */
+.gate__quick { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.gate__quickl { width: 100%; font-size: .82rem; color: var(--ink-3); }
+.plist__chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 3px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); color: var(--ink); font-size: .88rem; }
+.plist__chip:hover { border-color: var(--sp-2); }
+.linkbtn { border: 0; background: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }

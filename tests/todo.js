@@ -190,7 +190,16 @@ vm.runInContext(fs.readFileSync(path.join(ROOT, 'js/sha256.js'), 'utf8'), sctx);
 ok(sctx.GDC.sha256('abc') === 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad', 'SHA-256 de «abc» incorrecto');
 ok(sctx.GDC.sha256('ñandú ✦') === require('crypto').createHash('sha256').update('ñandú ✦').digest('hex'), 'SHA-256 falla con texto UTF-8');
 
-console.log('10. Contacto');
+console.log('10. Acceso libre (sin administrador)');
+const gateSrc = fs.readFileSync(path.join(ROOT, 'js/gate.js'), 'utf8');
+const appSrc = fs.readFileSync(path.join(ROOT, 'js/app.js'), 'utf8');
+ok(/Crear cuenta/.test(gateSrc) && /Iniciar sesión/.test(gateSrc), 'el acceso debe ofrecer «Crear cuenta» e «Iniciar sesión»');
+ok(/no se envía a ninguna base de datos/.test(gateSrc), 'falta el aviso de que la información no va a ninguna base de datos');
+ok(gateSrc.indexOf('gate__privacy') < gateSrc.indexOf('id="gateForm"'), 'el aviso de privacidad debe ir encima de los campos');
+ok(!/#\/admin|GDC\.Admin|role: 'admin'/.test(gateSrc + appSrc + fs.readFileSync(path.join(ROOT, 'js/palette.js'), 'utf8')), 'quedan restos de la cuenta de administrador');
+ok(!fs.existsSync(path.join(ROOT, 'js/admin.js')), 'js/admin.js debería haberse eliminado');
+
+console.log('11. Contacto');
 const views = fs.readFileSync(path.join(ROOT, 'js/views.js'), 'utf8');
 const app = fs.readFileSync(path.join(ROOT, 'js/app.js'), 'utf8');
 ok(/\['contacto', '#\/contacto', 'Contacto'\]/.test(app), 'el menú no tiene la opción Contacto');
