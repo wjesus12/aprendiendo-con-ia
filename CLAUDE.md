@@ -35,7 +35,7 @@ Portal estático para aprender Google Gemini desde cero, rumbo a las certificaci
 ## Identidad visual
 - Estética «cuaderno de laboratorio», temas claro y oscuro (tokens en `css/base.css`), respeta `prefers-reduced-motion`.
 - Mascota **Chispa** (`js/mascot.js`): estrella de cuatro puntas con cara. Paleta pedida por el autor: azul profundo `#1f5fe0` → azul cielo `#3aa0f5` → violeta `#7a5cf0` → amarillo oscuro `#c9921a` (sin rosa). Es arrastrable y da tips de `js/content/tips.js` (bilingües, en mazo sin repetir).
-- El menú tiene la opción **Contacto**, que muestra solo el hipervínculo «LinkedIn» a https://linkedin.com/in/wilmerjesuspaucar.
+- El menú tiene la opción **Sugerencias** (`#/sugerencias`; `#/contacto` es alias): un mensaje breve invitando a enviar sugerencias y un enlace con el logo oficial de LinkedIn + «Wilmer Jesús Paucar Ayquipa» a https://linkedin.com/in/wilmerjesuspaucar, con aspecto de enlace (color, subrayado, ↗).
 
 ## Verificación
 - Prueba en el navegador: escritorio y móvil (375 px, sin scroll horizontal), tema claro y oscuro, los tres idiomas y la consola sin errores.

@@ -154,8 +154,10 @@
 .contacto { min-height: 40vh; place-items: center; }
 .contacto__box { max-width: 460px; text-align: center; font-size: .95rem; color: var(--ink-2); }
 .contacto__box p { margin-bottom: 12px; line-height: 1.6; }
-.contacto__link { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 500; text-decoration: none; }
-.contacto__link:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.contacto__link { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; color: var(--accent); font-weight: 600; text-decoration: none; transition: background .15s; }
+.contacto__link > span:not(.contacto__ext):not(.sr-only) { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.contacto__link:hover, .contacto__link:focus-visible { background: var(--accent-soft); }
+.contacto__ext { font-size: .85em; }
 .contacto__logo { flex-shrink: 0; }
 
 /* ---------- Progreso ---------- */
@@ -305,3 +307,4 @@
 /* ---------- Aviso legal ---------- */
 .legal__text { max-width: 68ch; color: var(--ink-2); font-size: .95rem; line-height: 1.65; }
 .foot a { color: var(--ink-2); }
+.legal__text a, .gate__legal p a { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }

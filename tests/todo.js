@@ -1,6 +1,6 @@
 /* Pruebas del portal: node tests/todo.js
    Fase 1: sintaxis de todos los JS, carga del contenido en un entorno simulado,
-   bilingüismo de la ruta y presencia de la opción Contacto con el enlace correcto. */
+   bilingüismo de la ruta y presencia de la opción Sugerencias con el enlace correcto. */
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
@@ -199,17 +199,19 @@ ok(!/🔒/.test(gateSrc), 'el aviso de privacidad no debe usar el emoji de canda
 ok(/Aprendiendo<br><span class="ink-spark">con IA/.test(gateSrc) && !/Desde Cero/.test(gateSrc + appSrc + html), 'el nombre visible debe ser «Aprendiendo con IA»');
 const legalSrc = fs.readFileSync(path.join(ROOT, 'js/content/legal.js'), 'utf8');
 ok(/No está afiliado, patrocinado ni respaldado por Google LLC/.test(legalSrc), 'el aviso legal debe aclarar que no hay afiliación con Google');
+ok(legalSrc.includes('href="https://educertifications.google/register"'), 'el aviso legal debe enlazar la página oficial de registro de certificaciones');
 ok(/aviso-legal/.test(appSrc) && /gate__legal/.test(gateSrc), 'el aviso legal debe estar enlazado en el pie y en la pantalla de acceso');
 ok(gateSrc.indexOf('gate__privacy') < gateSrc.indexOf('id="gateForm"'), 'el aviso de privacidad debe ir encima de los campos');
 ok(!/#\/admin|GDC\.Admin|role: 'admin'/.test(gateSrc + appSrc + fs.readFileSync(path.join(ROOT, 'js/palette.js'), 'utf8')), 'quedan restos de la cuenta de administrador');
 ok(!fs.existsSync(path.join(ROOT, 'js/admin.js')), 'js/admin.js debería haberse eliminado');
 
-console.log('11. Contacto');
+console.log('11. Sugerencias');
 const views = fs.readFileSync(path.join(ROOT, 'js/views.js'), 'utf8');
 const app = fs.readFileSync(path.join(ROOT, 'js/app.js'), 'utf8');
-ok(/\['contacto', '#\/contacto', 'Contacto'\]/.test(app), 'el menú no tiene la opción Contacto');
-ok(/href="https:\/\/linkedin\.com\/in\/wilmerjesuspaucar"[^>]*>\$\{LINKEDIN_LOGO\}<span>Wilmer Paucar<\/span><\/a>/.test(views), 'Contacto debe enlazar al LinkedIn del autor con el logo y «Wilmer Paucar»');
-ok(/sugerencia para mejorar este entrenamiento/.test(views), 'Contacto debe invitar a enviar sugerencias');
+ok(/\['sugerencias', '#\/sugerencias', 'Sugerencias'\]/.test(app), 'el menú no tiene la opción Sugerencias');
+ok(/sugerencias\|contacto/.test(app), '#/contacto debe seguir funcionando como alias');
+ok(/href="https:\/\/linkedin\.com\/in\/wilmerjesuspaucar"[^>]*>\$\{LINKEDIN_LOGO\}<span>Wilmer Jesús Paucar Ayquipa<\/span>/.test(views), 'Sugerencias debe enlazar al LinkedIn del autor con el logo y su nombre completo');
+ok(/sugerencia para mejorar este entrenamiento/.test(views), 'Sugerencias debe invitar a enviar sugerencias');
 
 console.log(`\n${oks} comprobaciones correctas, ${fails} fallos.`);
 process.exit(fails ? 1 : 0);

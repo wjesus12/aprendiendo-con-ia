@@ -14,7 +14,7 @@
     [/^#\/simulacro$/, () => GDC.Exam.view(), 'simulacro'],
     [/^#\/progreso$/, () => GDC.Views.progreso(), 'progreso'],
     [/^#\/ajustes$/, () => GDC.Views.ajustes(), 'ajustes'],
-    [/^#\/contacto$/, () => GDC.Views.contacto(), 'contacto'],
+    [/^#\/(sugerencias|contacto)$/, () => GDC.Views.contacto(), 'sugerencias'],   /* #/contacto se mantiene por compatibilidad */
     [/^#\/aviso-legal$/, () => GDC.Views.legal(), 'aviso-legal']
   ];
 
@@ -29,7 +29,7 @@
     ['flashcards', '#/flashcards', 'Flashcards'],
     ['simulacro', '#/simulacro', 'Simulacros'],
     ['progreso', '#/progreso', 'Progreso'],
-    ['contacto', '#/contacto', 'Contacto']
+    ['sugerencias', '#/sugerencias', 'Sugerencias']
   ];
 
   let current = 'inicio';

@@ -141,7 +141,7 @@
     return wrap('contacto', `
       <div class="contacto__box">
         <p>¿Tienes alguna sugerencia para mejorar este entrenamiento?<br>Con mucho gusto puedes hacérmela llegar a:</p>
-        <a class="contacto__link" href="https://linkedin.com/in/wilmerjesuspaucar" target="_blank" rel="noopener noreferrer">${LINKEDIN_LOGO}<span>Wilmer Paucar</span></a>
+        <a class="contacto__link" href="https://linkedin.com/in/wilmerjesuspaucar" target="_blank" rel="noopener noreferrer">${LINKEDIN_LOGO}<span>Wilmer Jesús Paucar Ayquipa</span><span class="contacto__ext" aria-hidden="true">↗</span><span class="sr-only"> (abre LinkedIn en una pestaña nueva)</span></a>
       </div>`);
   }
 
