@@ -135,9 +135,9 @@ button { cursor: pointer; }
 .btn--block { width: 100%; }
 .btn--danger { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
 
-.field { display: grid; gap: .3em; font-size: .9rem; color: var(--ink-2); }
+.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: .3em; font-size: .9rem; color: var(--ink-2); }
 .field input, .field select, .field textarea {
-  min-height: 44px; padding: .55em .8em; border-radius: var(--r-s);
+  min-height: 44px; padding: .55em .8em; border-radius: var(--r-s); max-width: 100%; min-width: 0; text-overflow: ellipsis;
   border: 1.5px solid var(--rule-2); background: var(--card); color: var(--ink); font-size: 1rem;
 }
 .field input:focus, .field select:focus { border-color: var(--sp-2); outline: none; box-shadow: 0 0 0 3px rgba(122, 92, 240, .18); }

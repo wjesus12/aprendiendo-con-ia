@@ -168,7 +168,7 @@ ectx.GDC = { MOD: MOD, GLOSSARY: GL, LABS: [], RETOS: [], BANK: BANK, MODULES: M
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'js/core.js'), 'utf8'), ectx);
 ectx.GDC.Store = { P: () => ({ answers: {} }) };
 for (const f of ['js/practice.js', 'js/exam.js', 'js/flash.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ectx);
-for (const [type, mix] of Object.entries({ educator: { 1: 12, 2: 13, 3: 12 }, student: { S: 10, 1: 10, 3: 10 } })) {
+for (const [type, mix] of Object.entries({ educator: { 1: 12, 2: 13, 3: 12 }, student: { S: 10, 1: 10, 3: 10 }, faculty: { 1: 12, 2: 13, 3: 12 } })) {
   for (let round = 0; round < 20; round++) {
     const items = ectx.GDC.Exam.pickQuestions(type);
     const total = Object.values(mix).reduce((a, b) => a + b, 0);
@@ -177,6 +177,13 @@ for (const [type, mix] of Object.entries({ educator: { 1: 12, 2: 13, 3: 12 }, st
     for (const [d, n] of Object.entries(mix)) ok(items.filter(x => String(x.q.d) === d).length === n, `simulacro ${type}: dominio ${d} no tiene ${n} preguntas`);
   }
 }
+/* el simulacro Faculty debe estar hecho casi solo de preguntas universitarias */
+for (let round = 0; round < 10; round++) {
+  const items = ectx.GDC.Exam.pickQuestions('faculty');
+  const facShare = items.filter(x => ectx.GDC.Exam.isFac(x.q)).length / items.length;
+  ok(facShare >= 0.9, `simulacro faculty: solo ${Math.round(facShare * 100)} % de preguntas universitarias`);
+}
+ok(BANK.filter(q => q.fac).length >= 40, 'el banco necesita al menos 40 preguntas Faculty');
 const sm2 = ectx.GDC.Flash.sm2;
 let st = sm2(undefined, 4); ok(st.reps === 1 && st.iv === 1, 'SM-2: primer acierto debe dar intervalo de 1 día');
 st = sm2(st, 4); ok(st.reps === 2 && st.iv === 6, 'SM-2: segundo acierto debe dar 6 días');

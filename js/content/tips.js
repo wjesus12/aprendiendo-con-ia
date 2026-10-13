@@ -59,6 +59,8 @@
     T('¿Fallaste preguntas? En Práctica marca «solo las que fallé» y repásalas.', 'Missed some questions? In Practice tick “only the ones I missed” and review them.'),
     T('Las flashcards vuelven justo antes de que las olvides: repasa un poco cada día.', 'Flashcards come back right before you forget them: review a little every day.'),
     T('En los labs, primero encuentra la línea con el fallo; luego elige cómo arreglarla.', 'In the labs, first find the faulty line; then choose how to fix it.'),
+    T('¿Enseñas en la universidad? La Parte 8 te prepara para el Gemini Certified Faculty.', 'Teach at university? Part 8 prepares you for the Gemini Certified Faculty.'),
+    T('Para investigar: Deep Research hace el mapa; Gemini Notebook compara con citas tus fuentes validadas.', 'For research: Deep Research maps the field; Gemini Notebook compares your validated sources with citations.'),
     T('La IA libera tiempo cuando el docente define el propósito y revisa el resultado.', 'AI frees up time when the teacher defines the purpose and reviews the result.')
   ];
 })();

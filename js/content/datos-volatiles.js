@@ -20,12 +20,17 @@
     },
     examen: {
       educator: { tiempoMin: 120, preguntas: 37, preguntasOficial: false, validezAnios: 3, reintentoDias: 8, ventanaDias: 14, idiomaES: true, aprobadoEstimado: 80 },
-      student: { tiempoMin: 60, preguntas: 30, aproximacionPropia: true }
+      student: { tiempoMin: 60, preguntas: 30, aproximacionPropia: true },
+      /* Faculty: oficial = gratis, 3 años, opción múltiple, para profesores universitarios.
+         Google no publica duración ni número de preguntas: el simulacro usa 120 min y 37 preguntas como aproximación. */
+      faculty: { tiempoMin: 120, preguntas: 37, preguntasOficial: false, validezAnios: 3, gratis: true, curso: 'Get Started with Google AI in Higher Education' }
     },
     enlaces: {
       gemini: 'https://gemini.google.com',
       certificaciones: 'https://educertifications.google',
       guiaEducator: 'https://services.google.com/fh/files/misc/geminieducatorexamguide.pdf',
+      guiaFaculty: 'https://services.google.com/fh/files/misc/gemini_certified_faculty_exam_guide.pdf',
+      paginaCertificaciones: 'https://edu.google.com/intl/ALL_us/learning-center/certifications/',
       faq: 'https://support.google.com/googleforeducation/answer/16561655?hl=es',
       ayudaCanvas: 'https://support.google.com/gemini/answer/16047321?hl=es',
       skills: 'https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/about-the-transition-to-skills',

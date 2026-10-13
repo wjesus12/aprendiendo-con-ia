@@ -1,6 +1,6 @@
 # Aprendiendo con IA · Guía práctica de Gemini — reglas del proyecto
 
-Portal estático para aprender Google Gemini desde cero, rumbo a las certificaciones **Gemini Certified Educator** y **Gemini Student Certification** (Google for Education). Autor: Wilmer Jesús Paucar Ayquipa.
+Portal estático para aprender Google Gemini desde cero, rumbo a las certificaciones **Gemini Certified Educator**, **Gemini Certified Faculty** (educación superior, Parte 8: módulos 27-29, preguntas con `fac: true` en bank-9/10 y simulacro Faculty) y **Gemini Student Certification** (Google for Education). Autor: Wilmer Jesús Paucar Ayquipa.
 
 ## Cómo trabajar aquí
 - Responde siempre **en español**.

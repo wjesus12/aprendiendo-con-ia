@@ -148,3 +148,15 @@ Lo cita la guía del examen (2.2.1). Sus componentes, según materiales de Googl
 | 3 | Número de preguntas del Educator | No es oficial: 37 como aproximación declarada. |
 | 4 | Versiones de los modelos | Van a `datos-volatiles.js`, con fecha. |
 | 5 | Precios | No se fijan, porque varían según el país. |
+
+---
+
+## 6. Gemini Certified Faculty (añadido 2026-10-13) ✅
+Fuentes: [guía oficial del examen Faculty (PDF)](https://services.google.com/fh/files/misc/gemini_certified_faculty_exam_guide.pdf) · [Certificaciones de Google for Education](https://edu.google.com/intl/ALL_us/learning-center/certifications/) · [Google Blog, 17/11/2025](https://blog.google/products-and-platforms/products/education/gemini-certifications-education/)
+- **Para:** profesores universitarios («For Faculty»). Busca fluidez académica en IA: productividad en investigación, participación estudiantil y diseño de currículo y evaluación.
+- **Oficial:** gratis, válido por **3 años**, todos los exámenes de Gemini son de **opción múltiple**; anunciado en noviembre de 2025 («un examen para docentes universitarios llega el próximo mes»). Registro: educertifications.google (registro Faculty: /registration/6).
+- **Preparación:** curso «Get Started with Google AI in Higher Education» (y «Generative AI for Educators», según la guía).
+- **No publicado:** duración, número de preguntas, puntaje de aprobación, idiomas específicos. El simulacro del portal usa 37 preguntas / 120 min / 80 % como aproximación declarada.
+- **No es un «nivel superior» del Educator:** es una certificación paralela para educación superior; la guía no exige el Educator antes ni habla de formar a otros docentes.
+- **Dominios (misma estructura que Educator, enfoque universitario):** 1. Understanding Generative AI & Gemini in Academia · 2. Harnessing Gemini for Scholarly Applications · 3. Ethical & Responsible AI Use in Academia.
+- **Diferencias clave frente a Educator:** investigación (Deep Research, NotebookLM para revisiones de literatura), sílabo de curso nuevo y objetivos para una *grant proposal* (2.1.4), elegir herramienta incluyendo **Deep Research, Canvas, Veo e Imagen** (1.1.4, 1.3.2), Gemini en **Meet** (1.1.3), app móvil de NotebookLM (2.1.1), **Video Overviews y study guides** (2.2.3), Gem para **andamiar revisiones de literatura** (2.3.3), **riesgos de propiedad intelectual** (3.2.2), mitigar la **conducta académica indebida** (3.1.3), artefacto de clase para debatir el uso de IA (3.4.1).

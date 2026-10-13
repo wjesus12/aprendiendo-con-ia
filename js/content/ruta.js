@@ -8,7 +8,8 @@
     { id: 4, icon: '🗂️', title: { es: 'Gemini en Google Workspace', en: 'Gemini in Google Workspace' } },
     { id: 5, icon: '📚', title: { es: 'Gemini Notebook (antes NotebookLM)', en: 'Gemini Notebook (formerly NotebookLM)' } },
     { id: 6, icon: '🏫', title: { es: 'Gemini en el aula', en: 'Gemini in the classroom' } },
-    { id: 7, icon: '🎓', title: { es: 'Rumbo a la certificación', en: 'Road to certification' } }
+    { id: 7, icon: '🎓', title: { es: 'Rumbo a la certificación', en: 'Road to certification' } },
+    { id: 8, icon: '🏛️', title: { es: 'Educator y Faculty: Gemini en la universidad', en: 'Educator and Faculty: Gemini in higher education' } }
   ];
 
   const M = (id, part, es, en, map) => ({ id, part, title: { es, en }, map });
@@ -38,6 +39,9 @@
     M('23', 6, 'Personalización, diferenciación e inclusión', 'Personalization, differentiation and inclusion', 'E 1.2.2'),
     M('24', 6, 'Aumentar, no reemplazar: elegir la herramienta correcta', 'Augment, don’t replace: choosing the right tool', 'E 1.2.4 · 1.3.2 · 3.3.3'),
     M('25', 6, 'Ética, privacidad, sesgo, plagio y alfabetización en IA', 'Ethics, privacy, bias, plagiarism and AI literacy', 'E 1.2.5 · 3.1–3.4'),
-    M('26', 7, 'Los exámenes Educator y Student: estrategia y simulacros', 'The Educator and Student exams: strategy and mock exams', '—')
+    M('26', 7, 'Los exámenes Educator y Student: estrategia y simulacros', 'The Educator and Student exams: strategy and mock exams', '—'),
+    M('27', 8, 'Gemini para la investigación académica', 'Gemini for academic research', 'F 1.1.2 · 1.3.2 · 2.1.3 · 2.1.4'),
+    M('28', 8, 'Diseñar cursos universitarios con Gemini', 'Designing university courses with Gemini', 'F 1.3.1 · 2.1.2 · 2.3.1 · 2.3.3'),
+    M('29', 8, 'Integridad, propiedad intelectual y el examen Faculty', 'Integrity, intellectual property and the Faculty exam', 'F 3.1.3 · 3.2.2 · 3.4.1 · 3.4.2')
   ];
 })();

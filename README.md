@@ -1,6 +1,6 @@
 # Aprendiendo con IA · Guía práctica de Gemini
 
-Portal interactivo para aprender **Google Gemini** desde cero hasta nivel experto, rumbo a las certificaciones de Google for Education **Gemini Certified Educator** y **Gemini Student Certification**. Está pensado para quien nunca ha escrito un prompt.
+Portal interactivo para aprender **Google Gemini** desde cero hasta nivel experto, rumbo a las certificaciones de Google for Education **Gemini Certified Educator**, **Gemini Certified Faculty** (educación superior) y **Gemini Student Certification**. Está pensado para quien nunca ha escrito un prompt.
 
 Cubre el entorno Gemini completo: el Gemini app y sus modelos, **Canvas**, **Gems** (y su transición a skills), **Nano Banana**, **Deep Research**, **Guided Learning**, **Gemini Live**, **Gemini Notebook** (antes NotebookLM) y Gemini en **Drive, Docs, Slides, Sheets, Gmail, Forms y Vids**.
 
@@ -18,12 +18,12 @@ Los nombres de producto (Canvas, Gems, Deep Research…) se mantienen en inglés
 
 | Sección | Contenido |
 |---|---|
-| **Ruta desde cero** | 26 módulos en 7 partes: fundamentos de IA, prompting (marco PARTS y Propósito · Audiencia · Formato · Límites), herramientas creativas, Workspace, Gemini Notebook, Gemini en el aula y la certificación. Cada módulo indica qué objetivos de la guía oficial cubre y trae explicación, tablas, prompts para copiar, trampas frecuentes, ideas clave, mini quiz y fuentes oficiales |
-| **Glosario** | 148 términos bilingües con buscador y 9 categorías, cada uno enlazado a su módulo |
+| **Ruta desde cero** | 29 módulos en 8 partes: fundamentos de IA, prompting (marco PARTS y Propósito · Audiencia · Formato · Límites), herramientas creativas, Workspace, Gemini Notebook, Gemini en el aula, la certificación y **Educator y Faculty: Gemini en la universidad** (investigación, diseño de cursos, propiedad intelectual). Cada módulo indica qué objetivos de la guía oficial cubre y trae explicación, tablas, prompts para copiar, trampas frecuentes, ideas clave, mini quiz y fuentes oficiales |
+| **Glosario** | 155 términos bilingües con buscador y 9 categorías, cada uno enlazado a su módulo |
 | **Labs** | 15 casos de «encuentra el fallo» en prompts, Gems, apps de Canvas, respuestas de la IA, políticas y fórmulas de Sheets |
 | **Retos** | 8 retos de construcción: arrastra o toca piezas para armar prompts, Gems y flujos, con distractores y solución explicada |
-| **Práctica** | 238 preguntas de escenario (160 originales y 78 de los mini quiz), filtrables por dominio, módulo y «solo las que fallé» |
-| **Simulacros** | Educator: 37 preguntas y 120 minutos (12/13/12 por dominio). Student: 30 preguntas y 60 minutos. Con cronómetro, marcado para revisar, mapa de preguntas y revisión final |
+| **Práctica** | 287 preguntas de escenario (200 originales, 40 de ellas de nivel universitario, y 87 de los mini quiz), filtrables por dominio, módulo y «solo las que fallé» |
+| **Simulacros** | Educator y Faculty: 37 preguntas y 120 minutos (12/13/12 por dominio; Faculty prioriza preguntas universitarias). Student: 30 preguntas y 60 minutos. Con cronómetro, marcado para revisar, mapa de preguntas y revisión final |
 | **Flashcards** | Repaso espaciado (SM-2) sobre el glosario |
 | **Progreso** | XP, niveles, racha, logros, aciertos por dominio, temas débiles y brecha de idioma |
 | **Cuentas locales** | De uso libre: cada persona crea su propia cuenta con nombre y contraseña (SHA-256 con sal). La información **no se envía a ninguna base de datos**: se guarda solo en el navegador. Incluye respaldo en JSON, cambio de contraseña y «Eliminar mi cuenta» |

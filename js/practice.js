@@ -54,6 +54,7 @@
         </div>
         <label class="pr__check"><input type="checkbox" name="failed" ${failed.length ? '' : 'disabled'}> Solo las que fallé la última vez (${failed.length})</label>
         <label class="pr__check"><input type="checkbox" name="unseen"> Solo las que nunca respondí</label>
+        <label class="pr__check"><input type="checkbox" name="fac"> Solo preguntas de nivel universitario (Faculty)</label>
         <p class="gform__err" id="prErr" role="alert"></p>
         <button class="btn btn--spark">Empezar práctica</button>
       </form>
@@ -66,6 +67,7 @@
       let qs = all.filter(q => (d === 'all' || String(q.d) === d) && (mod === 'all' || q.mod === mod));
       if (fd.get('failed')) qs = qs.filter(q => P.answers[q.id]?.last === false);
       if (fd.get('unseen')) qs = qs.filter(q => !P.answers[q.id]);
+      if (fd.get('fac')) qs = qs.filter(q => q.fac || ['27', '28', '29'].includes(q.mod));
       if (!qs.length) { el.querySelector('#prErr').textContent = 'No hay preguntas con esos filtros. Prueba otra combinación.'; return; }
       session = { qs: GDC.shuffle(qs).slice(0, n), i: 0, ok: 0, done: false, answered: false };
       GDC.App.route();
@@ -83,7 +85,7 @@
       </div>
       <span class="bar pr__progress" aria-hidden="true"><i style="width:${Math.round((s.i / s.qs.length) * 100)}%"></i></span>
       <p class="pr__meta"><span class="chip chip--spark">${DOMAINS[q.d].icon} ${q.d === 'S' ? 'Student' : 'Dominio ' + q.d}</span>
-        <a class="chip" href="#/modulo/${q.mod}">Módulo ${q.mod}</a>${q.src === 'mod' ? '<span class="chip">mini quiz</span>' : ''}</p>
+        <a class="chip" href="#/modulo/${q.mod}">Módulo ${q.mod}</a>${q.fac ? '<span class="chip">🏛️ Faculty</span>' : ''}${q.src === 'mod' ? '<span class="chip">mini quiz</span>' : ''}</p>
       <div id="prCard">${GDC.Lessons.quizCard(q, s.i, s.qs.length, q.id)}</div>
       <div class="pr__next" id="prNext" hidden><button type="button" class="btn btn--spark" data-act="next">${s.i + 1 < s.qs.length ? U('Siguiente', 'Next') + ' →' : U('Ver resultado', 'See result')}</button></div>
     </section>`);

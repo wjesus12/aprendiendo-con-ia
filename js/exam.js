@@ -1,11 +1,23 @@
 /* Simulacros cronometrados (preguntas originales; las reales son confidenciales).
    Educator: 37 preguntas · 120 min · reparto parejo D1/D2/D3 · aprobado estimado 80 % (no oficial).
-   Student: 30 preguntas · 60 min · Student + D1 + D3 (aproximación propia). */
+   Student: 30 preguntas · 60 min · Student + D1 + D3 (aproximación propia).
+   Faculty: 37 preguntas · 120 min · D1/D2/D3 con prioridad a las preguntas universitarias (fac o módulos 27-29).
+   Google no publica duración ni número de preguntas del Faculty: es una aproximación declarada. */
 (function () {
   const esc = GDC.esc;
   const TYPES = {
     educator: { name: 'Gemini Certified Educator', n: 37, min: 120, mix: { 1: 12, 2: 13, 3: 12 }, pass: 80 },
+    faculty: { name: 'Gemini Certified Faculty', n: 37, min: 120, mix: { 1: 12, 2: 13, 3: 12 }, pass: 80 },
     student: { name: 'Gemini Student Certification', n: 30, min: 60, mix: { S: 10, 1: 10, 3: 10 }, pass: 80 }
+  };
+  const FAC_MODS = ['27', '28', '29'];
+  const isFac = q => !!q.fac || FAC_MODS.includes(q.mod);
+  /* Qué preguntas se priorizan en cada simulacro (el resto completa si faltan) */
+  const PREFER = { educator: q => !isFac(q), student: () => true, faculty: isFac };
+  const CARD = {
+    educator: { kicker: '👩‍🏫 Docentes de colegio', short: 'Educator', text: 'El examen real dura 2 horas y es de opción múltiple; Google no publica el número de preguntas ni el puntaje de aprobación: aquí usamos 37 y 80 % como aproximación.' },
+    faculty: { kicker: '🏛️ Profesores universitarios', short: 'Faculty', text: 'Oficial: gratis, válido 3 años y de opción múltiple. Google no publica la duración ni el número de preguntas: aquí usamos 120 min, 37 preguntas y 80 % como aproximación. Prioriza investigación, diseño de cursos y propiedad intelectual (módulos 27 a 29).' },
+    student: { kicker: '🎓 Estudiantes', short: 'Student', text: 'Aproximación propia basada en los temas oficiales: alfabetización en IA, Gemini, Gemini Notebook, Guided Learning y uso responsable.' }
   };
   const UI = (es, en) => { const m = GDC.lang(); return m === 'en' ? en : m === 'es' ? es : `${en} · ${es}`; };
   let exam = null;   // simulacro en curso (vive mientras la pestaña esté abierta)
@@ -28,10 +40,10 @@
       </header>
       <div class="grid2">
         ${Object.entries(TYPES).map(([k, t]) => `<section class="sheet ex__card">
-          <p class="kicker">${k === 'educator' ? '👩‍🏫 Docentes' : '🎓 Estudiantes'}</p>
+          <p class="kicker">${CARD[k].kicker}</p>
           <h2>${esc(t.name)}</h2>
           <ul class="ex__facts"><li><b>${t.n}</b> preguntas</li><li><b>${t.min}</b> min</li><li>aprobado estimado <b>${t.pass} %</b></li></ul>
-          <p class="muted">${k === 'educator' ? 'El examen real dura 2 horas y es de opción múltiple; Google no publica el número de preguntas ni el puntaje de aprobación: aquí usamos 37 y 80 % como aproximación.' : 'Aproximación propia basada en los temas oficiales: alfabetización en IA, Gemini, Gemini Notebook, Guided Learning y uso responsable.'}</p>
+          <p class="muted">${CARD[k].text}</p>
           <button type="button" class="btn btn--spark" data-start="${k}">Empezar simulacro</button>
         </section>`).join('')}
       </div>
@@ -45,7 +57,7 @@
       </section>
       ${hist.length ? `<section class="sheet"><h2>Tus últimos simulacros</h2>
         <div class="tablewrap"><table class="table"><thead><tr><th>Fecha</th><th>Tipo</th><th>Puntaje</th><th>Resultado</th><th>Idioma</th></tr></thead>
-        <tbody>${hist.map(x => `<tr><td>${new Date(x.at).toLocaleDateString('es')}</td><td>${x.type === 'educator' ? 'Educator' : 'Student'}</td><td>${x.pct}% (${x.ok}/${x.n})</td><td>${x.pct >= TYPES[x.type].pass ? '✓ aprobado' : '✗ no aprobado'}</td><td>${GDC.MODES[x.lang]?.short || x.lang}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
+        <tbody>${hist.map(x => `<tr><td>${new Date(x.at).toLocaleDateString('es')}</td><td>${CARD[x.type]?.short || x.type}</td><td>${x.pct}% (${x.ok}/${x.n})</td><td>${x.pct >= TYPES[x.type].pass ? '✓ aprobado' : '✗ no aprobado'}</td><td>${GDC.MODES[x.lang]?.short || x.lang}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
     </section>`);
     el.addEventListener('click', e => { const b = e.target.closest('[data-start]'); if (b) start(b.dataset.start); });
     return el;
@@ -57,11 +69,15 @@
     const P = GDC.Store.P();
     let qs = [];
     for (const [d, n] of Object.entries(t.mix)) {
-      const bank = GDC.shuffle(all.filter(q => String(q.d) === d && q.src === 'bank'));
-      const extra = GDC.shuffle(all.filter(q => String(q.d) === d && q.src === 'mod'));
-      /* prioriza las que aún no viste */
-      const fresh = arr => arr.sort((a, b) => (P.answers[a.id] ? 1 : 0) - (P.answers[b.id] ? 1 : 0));
-      qs = qs.concat(fresh(bank).concat(fresh(extra)).slice(0, n));
+      const pref = PREFER[type] || (() => true);
+      const inD = all.filter(q => String(q.d) === d);
+      /* prioriza: preguntas propias del simulacro (banco y luego mini quiz) y, dentro de ellas, las que aún no viste */
+      const fresh = arr => GDC.shuffle(arr).sort((a, b) => (P.answers[a.id] ? 1 : 0) - (P.answers[b.id] ? 1 : 0));
+      const ordered = [
+        ...fresh(inD.filter(q => pref(q) && q.src === 'bank')), ...fresh(inD.filter(q => pref(q) && q.src === 'mod')),
+        ...fresh(inD.filter(q => !pref(q) && q.src === 'bank')), ...fresh(inD.filter(q => !pref(q) && q.src === 'mod'))
+      ];
+      qs = qs.concat(ordered.slice(0, n));
     }
     return GDC.shuffle(qs).map(q => ({ q, order: GDC.shuffle(q.o.map((_, i) => i)), pick: null, flag: false }));
   }
@@ -198,5 +214,5 @@
     return el;
   }
 
-  GDC.Exam = { view, TYPES, pickQuestions };
+  GDC.Exam = { view, TYPES, pickQuestions, isFac };
 })();
