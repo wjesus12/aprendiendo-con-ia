@@ -67,7 +67,7 @@
       let qs = all.filter(q => (d === 'all' || String(q.d) === d) && (mod === 'all' || q.mod === mod));
       if (fd.get('failed')) qs = qs.filter(q => P.answers[q.id]?.last === false);
       if (fd.get('unseen')) qs = qs.filter(q => !P.answers[q.id]);
-      if (fd.get('fac')) qs = qs.filter(q => q.fac || ['27', '28', '29'].includes(q.mod));
+      if (fd.get('fac')) qs = qs.filter(q => GDC.Exam.isFac(q));
       if (!qs.length) { el.querySelector('#prErr').textContent = 'No hay preguntas con esos filtros. Prueba otra combinación.'; return; }
       session = { qs: GDC.shuffle(qs).slice(0, n), i: 0, ok: 0, done: false, answered: false };
       GDC.App.route();

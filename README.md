@@ -18,12 +18,12 @@ Los nombres de producto (Canvas, Gems, Deep Research…) se mantienen en inglés
 
 | Sección | Contenido |
 |---|---|
-| **Ruta desde cero** | 29 módulos en 8 partes: fundamentos de IA, prompting (marco PARTS y Propósito · Audiencia · Formato · Límites), herramientas creativas, Workspace, Gemini Notebook, Gemini en el aula, la certificación y **Educator y Faculty: Gemini en la universidad** (investigación, diseño de cursos, propiedad intelectual). Cada módulo indica qué objetivos de la guía oficial cubre y trae explicación, tablas, prompts para copiar, trampas frecuentes, ideas clave, mini quiz y fuentes oficiales |
+| **Ruta desde cero** | 32 módulos en 8 partes: fundamentos de IA, prompting (marco PARTS y Propósito · Audiencia · Formato · Límites), herramientas creativas, Workspace, Gemini Notebook, Gemini en el aula, la certificación y **Educator y Faculty: Gemini en la universidad** (6 módulos: fundamentos en la academia, investigación, diseño de cursos, participación estudiantil, integridad y propiedad intelectual, y el examen Faculty con enlaces oficiales de registro). Cada módulo indica qué objetivos de la guía oficial cubre y trae explicación, tablas, prompts para copiar, trampas frecuentes, ideas clave, mini quiz y fuentes oficiales |
 | **Glosario** | 155 términos bilingües con buscador y 9 categorías, cada uno enlazado a su módulo |
 | **Labs** | 15 casos de «encuentra el fallo» en prompts, Gems, apps de Canvas, respuestas de la IA, políticas y fórmulas de Sheets |
 | **Retos** | 8 retos de construcción: arrastra o toca piezas para armar prompts, Gems y flujos, con distractores y solución explicada |
-| **Práctica** | 287 preguntas de escenario (200 originales, 40 de ellas de nivel universitario, y 87 de los mini quiz), filtrables por dominio, módulo y «solo las que fallé» |
-| **Simulacros** | Educator y Faculty: 37 preguntas y 120 minutos (12/13/12 por dominio; Faculty prioriza preguntas universitarias). Student: 30 preguntas y 60 minutos. Con cronómetro, marcado para revisar, mapa de preguntas y revisión final |
+| **Práctica** | 366 preguntas de escenario (240 originales, 80 de ellas de nivel universitario, y 126 de los mini quiz; filtro «Solo preguntas de nivel universitario (Faculty)»), filtrables por dominio, módulo y «solo las que fallé» |
+| **Simulacros** | Educator y Faculty: 37 preguntas y 120 minutos (12/13/12 por dominio; Faculty prioriza preguntas universitarias). Student: 30 preguntas y 60 minutos. Faculty: 2 h oficiales; Google no publica el número de preguntas (se reportan ~37). Con cronómetro, marcado para revisar, mapa de preguntas y revisión final |
 | **Flashcards** | Repaso espaciado (SM-2) sobre el glosario |
 | **Progreso** | XP, niveles, racha, logros, aciertos por dominio, temas débiles y brecha de idioma |
 | **Cuentas locales** | De uso libre: cada persona crea su propia cuenta con nombre y contraseña (SHA-256 con sal). La información **no se envía a ninguna base de datos**: se guarda solo en el navegador. Incluye respaldo en JSON, cambio de contraseña y «Eliminar mi cuenta» |

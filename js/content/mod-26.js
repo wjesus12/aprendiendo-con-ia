@@ -65,7 +65,7 @@ GDC.MOD['26'] = {
           { es: '**Privacidad primero:** descarta opciones que expongan datos de estudiantes.', en: '**Privacy first:** rule out options that expose student data.' },
           { es: '**Administra el tiempo:** marca las dudosas y vuelve al final.', en: '**Manage time:** flag doubtful ones and come back at the end.' }
         ] },
-        { note: { es: '¿Enseñas en la universidad? La certificación paralela **Gemini Certified Faculty** se prepara en la **Parte 8** (módulos 27 a 29) y tiene su propio simulacro.', en: 'Do you teach at university? The parallel **Gemini Certified Faculty** certification is covered in **Part 8** (modules 27 to 29) and has its own mock exam.' }, kind: 'exam' },
+        { note: { es: '¿Enseñas en la universidad? La certificación paralela **Gemini Certified Faculty** se prepara en la **Parte 8** (módulos 27 a 32) y tiene su propio simulacro.', en: 'Do you teach at university? The parallel **Gemini Certified Faculty** certification is covered in **Part 8** (modules 27 to 32) and has its own mock exam.' }, kind: 'exam' },
         { note: { es: 'Los simulacros del portal imitan el formato con preguntas **originales**: las preguntas reales del examen son confidenciales. Practica en modo ES y también en EN.', en: 'The portal’s mock exams mimic the format with **original** questions: real exam questions are confidential. Practise in ES mode and also in EN.' }, kind: 'info' }
       ]
     }

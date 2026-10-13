@@ -1,8 +1,8 @@
 /* Simulacros cronometrados (preguntas originales; las reales son confidenciales).
    Educator: 37 preguntas · 120 min · reparto parejo D1/D2/D3 · aprobado estimado 80 % (no oficial).
    Student: 30 preguntas · 60 min · Student + D1 + D3 (aproximación propia).
-   Faculty: 37 preguntas · 120 min · D1/D2/D3 con prioridad a las preguntas universitarias (fac o módulos 27-29).
-   Google no publica duración ni número de preguntas del Faculty: es una aproximación declarada. */
+   Faculty: 37 preguntas · 120 min · D1/D2/D3 con prioridad a las preguntas universitarias (fac o módulos 27-32).
+   Oficial (FAQ de Gemini): 2 horas. Google no publica el número de preguntas (se reportan ~37) ni el aprobado: aproximación declarada. */
 (function () {
   const esc = GDC.esc;
   const TYPES = {
@@ -10,13 +10,13 @@
     faculty: { name: 'Gemini Certified Faculty', n: 37, min: 120, mix: { 1: 12, 2: 13, 3: 12 }, pass: 80 },
     student: { name: 'Gemini Student Certification', n: 30, min: 60, mix: { S: 10, 1: 10, 3: 10 }, pass: 80 }
   };
-  const FAC_MODS = ['27', '28', '29'];
+  const FAC_MODS = ['27', '28', '29', '30', '31', '32'];
   const isFac = q => !!q.fac || FAC_MODS.includes(q.mod);
   /* Qué preguntas se priorizan en cada simulacro (el resto completa si faltan) */
-  const PREFER = { educator: q => !isFac(q), student: () => true, faculty: isFac };
+  const PREFER = { educator: q => !isFac(q), student: q => !isFac(q), faculty: isFac };
   const CARD = {
     educator: { kicker: '👩‍🏫 Docentes de colegio', short: 'Educator', text: 'El examen real dura 2 horas y es de opción múltiple; Google no publica el número de preguntas ni el puntaje de aprobación: aquí usamos 37 y 80 % como aproximación.' },
-    faculty: { kicker: '🏛️ Profesores universitarios', short: 'Faculty', text: 'Oficial: gratis, válido 3 años y de opción múltiple. Google no publica la duración ni el número de preguntas: aquí usamos 120 min, 37 preguntas y 80 % como aproximación. Prioriza investigación, diseño de cursos y propiedad intelectual (módulos 27 a 29).' },
+    faculty: { kicker: '🏛️ Profesores universitarios', short: 'Faculty', text: 'Oficial: gratis, válido 3 años, de opción múltiple y con 2 horas para completarlo. Google no publica el número de preguntas ni el puntaje de aprobación: se reportan unas 37 preguntas, así que aquí usamos 37 y 80 % como aproximación. Prioriza las preguntas universitarias de la Parte 8 (módulos 27 a 32).' },
     student: { kicker: '🎓 Estudiantes', short: 'Student', text: 'Aproximación propia basada en los temas oficiales: alfabetización en IA, Gemini, Gemini Notebook, Guided Learning y uso responsable.' }
   };
   const UI = (es, en) => { const m = GDC.lang(); return m === 'en' ? en : m === 'es' ? es : `${en} · ${es}`; };

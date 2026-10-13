@@ -20,7 +20,7 @@
           <h1 class="gate__title rise" style="--i:2">Aprendiendo<br><span class="ink-spark">con IA</span></h1>
           <p class="gate__lede rise" style="--i:3">Aprende a usar Gemini y sus herramientas aunque nunca hayas escrito un prompt. Canvas, Gems, Nano Banana, Gemini Notebook, Docs, Slides, Sheets y Drive, rumbo a las certificaciones <b>Gemini Certified Educator</b>, <b>Faculty</b> y <b>Student</b>.</p>
           <ul class="gate__chips rise" style="--i:4">
-            <li class="chip chip--spark">Gratis y abierto</li><li class="chip">29 módulos</li><li class="chip">ES · EN · EN+ES</li><li class="chip">Labs y simulacros</li>
+            <li class="chip chip--spark">Gratis y abierto</li><li class="chip">32 módulos</li><li class="chip">ES · EN · EN+ES</li><li class="chip">Labs y simulacros</li>
           </ul>
         </div>
         <div class="gate__card sheet rise" style="--i:2">

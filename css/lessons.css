@@ -14,7 +14,7 @@
 .lx__toc a:hover { color: var(--accent); text-decoration: underline; }
 .lx__toc .bi__es { display: none; }
 
-.lx__main { display: grid; gap: 30px; min-width: 0; }
+.lx__main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; min-width: 0; }
 .lx__sec h2 { font-size: 1.45rem; padding-bottom: 6px; border-bottom: 2px solid var(--rule); margin-bottom: 14px; }
 .lx__sec > p, .lx__sec > .biblock { max-width: 72ch; }
 .lx__h { margin-top: 1.2em; }
@@ -148,3 +148,12 @@
   .lx__flow li:not(:last-child)::after { content: "↓"; right: auto; left: 22px; bottom: -14px; }
   .gl__list { grid-template-columns: 1fr; }
 }
+
+/* Enlaces oficiales dentro de un módulo (bloque links) */
+.lx__links { list-style: none; padding: 0; margin: 1em 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: .7em; }
+.lx__link { display: grid; gap: .25em; height: 100%; padding: .85em 1em; border: 1.5px solid var(--rule-2); border-radius: var(--r-s); background: var(--card); color: var(--ink); text-decoration: none; transition: border-color .15s, transform .15s, box-shadow .15s; }
+.lx__link:hover, .lx__link:focus-visible { border-color: var(--sp-2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(122, 92, 240, .14); }
+.lx__linkt { font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.lx__linkd { font-size: .9rem; color: var(--ink-2); }
+.lx__linku { font-size: .75rem; color: var(--ink-3); overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .lx__link { transition: none; } .lx__link:hover { transform: none; } }

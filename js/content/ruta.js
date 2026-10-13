@@ -40,8 +40,11 @@
     M('24', 6, 'Aumentar, no reemplazar: elegir la herramienta correcta', 'Augment, don’t replace: choosing the right tool', 'E 1.2.4 · 1.3.2 · 3.3.3'),
     M('25', 6, 'Ética, privacidad, sesgo, plagio y alfabetización en IA', 'Ethics, privacy, bias, plagiarism and AI literacy', 'E 1.2.5 · 3.1–3.4'),
     M('26', 7, 'Los exámenes Educator y Student: estrategia y simulacros', 'The Educator and Student exams: strategy and mock exams', '—'),
-    M('27', 8, 'Gemini para la investigación académica', 'Gemini for academic research', 'F 1.1.2 · 1.3.2 · 2.1.3 · 2.1.4'),
-    M('28', 8, 'Diseñar cursos universitarios con Gemini', 'Designing university courses with Gemini', 'F 1.3.1 · 2.1.2 · 2.3.1 · 2.3.3'),
-    M('29', 8, 'Integridad, propiedad intelectual y el examen Faculty', 'Integrity, intellectual property and the Faculty exam', 'F 3.1.3 · 3.2.2 · 3.4.1 · 3.4.2')
+    M('27', 8, 'IA generativa y Gemini en la academia', 'Generative AI and Gemini in academia', 'F 1.1.1 · 1.1.3 · 1.1.4 · 1.2.1-1.2.5 · 1.3.2'),
+    M('28', 8, 'Gemini para la investigación académica', 'Gemini for academic research', 'F 1.1.2 · 1.3.2 · 2.1.3 · 2.1.4 · 2.2.2 · 3.2.1'),
+    M('29', 8, 'Diseñar cursos universitarios con Gemini', 'Designing university courses with Gemini', 'F 1.3.1 · 2.1.2 · 2.1.6 · 2.3.1 · 2.3.3'),
+    M('30', 8, 'Participación estudiantil: Studio, imágenes, video y prompts', 'Student engagement: Studio, images, video and prompts', 'F 2.1.1 · 2.1.5 · 2.2.1 · 2.2.3 · 2.3.2 · 2.3.4'),
+    M('31', 8, 'Integridad académica, propiedad intelectual y alfabetización en IA', 'Academic integrity, intellectual property and AI literacy', 'F 3.1.1-3.1.4 · 3.2.1-3.2.3 · 3.3.1-3.3.3 · 3.4.1 · 3.4.2'),
+    M('32', 8, 'El examen Gemini Certified Faculty: formato, inscripción y estrategia', 'The Gemini Certified Faculty exam: format, registration and strategy', 'F 1-3 · repaso')
   ];
 })();

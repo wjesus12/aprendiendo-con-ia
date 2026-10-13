@@ -1,5 +1,5 @@
 /* Motor de módulos: renderiza el contenido de js/content/mod-XX.js y su mini quiz.
-   Bloques: p, h, list, steps, table, note(kind), flow, prompt, compare, quote. */
+   Bloques: p, h, list, steps, table, note(kind), flow, prompt, compare, quote, links (enlaces oficiales https). */
 (function () {
   const esc = GDC.esc;
   GDC.MOD = GDC.MOD || {};
@@ -36,6 +36,11 @@
         <div class="lx__cmp lx__cmp--good"><p class="lx__cmplabel">✓ ${GDC.L({ es: 'Efectivo', en: 'Effective' })}</p><blockquote>${GDC.LB(b.compare.good.t)}</blockquote>${GDC.LB(b.compare.good.why)}</div>
       </div>`;
     if (b.quote) return `<blockquote class="lx__quote">${GDC.LB(b.quote)}</blockquote>`;
+    if (b.links) return `<ul class="lx__links">${b.links.map(l => `<li><a class="lx__link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">
+        <span class="lx__linkt">${GDC.L(l.t)} <span class="lx__ext" aria-hidden="true">↗</span></span>
+        ${l.d ? `<span class="lx__linkd">${GDC.L(l.d)}</span>` : ''}
+        <span class="lx__linku mono">${esc(l.url.replace(/^https:\/\//, '').replace(/[?#].*$/, ''))}</span>
+        <span class="sr-only"> (abre en una pestaña nueva)</span></a></li>`).join('')}</ul>`;
     return '';
   }
 

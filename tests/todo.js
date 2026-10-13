@@ -42,7 +42,7 @@ const contentFiles = fs.readdirSync(path.join(ROOT, 'js/content')).filter(f => f
 for (const f of contentFiles) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js/content', f), 'utf8'), ctx, { filename: f });
 for (const f of contentFiles) ok(html.includes(`js/content/${f}?v=`), `index.html no carga js/content/${f}`);
 const { MODULES, PARTS } = ctx.GDC;
-ok(MODULES.length >= 20 && MODULES.length <= 30, 'la ruta debe tener entre 20 y 30 módulos');
+ok(MODULES.length >= 20 && MODULES.length <= 35, 'la ruta debe tener entre 20 y 35 módulos');
 ok(new Set(MODULES.map(m => m.id)).size === MODULES.length, 'ids de módulo repetidos');
 for (const m of MODULES) {
   ok(m.title.es && m.title.en, `módulo ${m.id} sin título bilingüe`);
@@ -90,6 +90,7 @@ for (const id of written) {
   ok(m.quiz.length >= 3, `mod ${id}: menos de 3 preguntas`);
   m.quiz.forEach((q, i) => checkQuestion(q, `mod ${id} quiz ${i + 1}`));
   ok(Array.isArray(m.fuentes) && m.fuentes.length >= 1 && m.fuentes.every(f => /^https:\/\//.test(f.url)), `mod ${id}: fuentes ausentes o sin https`);
+  for (const sec of m.secciones) for (const b of sec.b) if (b.links) ok(b.links.length > 0 && b.links.every(l => /^https:\/\//.test(l.url) && l.t?.es && l.t?.en), `mod ${id}: enlace sin https o sin título bilingüe`);
   const txt = JSON.stringify(m);
   for (const [, ref] of txt.matchAll(/#\/modulo\/(\d\d)/g)) ok(MODULES.some(x => x.id === ref), `mod ${id}: enlace a módulo inexistente ${ref}`);
   ok(!/PUCP|IDU|1IND\d/i.test(txt), `mod ${id}: menciona la institución o códigos de curso`);
@@ -183,7 +184,8 @@ for (let round = 0; round < 10; round++) {
   const facShare = items.filter(x => ectx.GDC.Exam.isFac(x.q)).length / items.length;
   ok(facShare >= 0.9, `simulacro faculty: solo ${Math.round(facShare * 100)} % de preguntas universitarias`);
 }
-ok(BANK.filter(q => q.fac).length >= 40, 'el banco necesita al menos 40 preguntas Faculty');
+ok(BANK.filter(q => q.fac).length >= 80, 'el banco necesita al menos 80 preguntas Faculty');
+for (const id of ['27', '28', '29', '30', '31', '32']) ok((MOD[id]?.quiz?.length || 0) >= 8, `el módulo Faculty ${id} necesita al menos 8 preguntas de mini quiz`);
 const sm2 = ectx.GDC.Flash.sm2;
 let st = sm2(undefined, 4); ok(st.reps === 1 && st.iv === 1, 'SM-2: primer acierto debe dar intervalo de 1 día');
 st = sm2(st, 4); ok(st.reps === 2 && st.iv === 6, 'SM-2: segundo acierto debe dar 6 días');

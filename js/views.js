@@ -71,7 +71,7 @@
       <section class="block">
         <h2>Tu camino</h2>
         <div class="tiles">
-          ${tile('#/ruta', '🧭', 'Ruta desde cero', '29 módulos en 8 partes: de «¿qué es la IA?» a Educator y Faculty.')}
+          ${tile('#/ruta', '🧭', 'Ruta desde cero', '32 módulos en 8 partes: de «¿qué es la IA?» a Educator y Faculty.')}
           ${tile('#/glosario', '📒', 'Glosario', 'Más de 110 términos con buscador y enlace al módulo.')}
           ${tile('#/practica', '🎯', 'Práctica', 'Preguntas de escenario con explicación de cada opción.')}
           ${tile('#/labs', '🔍', 'Labs', 'Encuentra el fallo en prompts, Gems y flujos reales.')}
@@ -95,7 +95,7 @@
       <header class="page__head">
         <p class="kicker">Ruta desde cero</p>
         <h1>De «¿qué es la IA?» a <span class="ink-spark">experto Gemini</span></h1>
-        <p class="lede">Ocho partes, veintinueve módulos. Cada módulo indica qué objetivos cubre: <b>Gemini Certified Educator</b> (E 1.1.1, E 2.3.3…) y, en la Parte 8, <b>Gemini Certified Faculty</b> (F 1.1.1…).</p>
+        <p class="lede">Ocho partes, treinta y dos módulos. Cada módulo indica qué objetivos cubre: <b>Gemini Certified Educator</b> (E 1.1.1, E 2.3.3…) y, en la Parte 8 (seis módulos para educación superior), <b>Gemini Certified Faculty</b> (F 1.1.1…).</p>
       </header>
       <ol class="parts">
         ${GDC.PARTS.map(p => `<li class="part sheet rise" style="--i:${p.id}">

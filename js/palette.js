@@ -6,7 +6,7 @@
   function commands() {
     const list = [
       { k: '/inicio', d: 'Ir al inicio', run: go('#/inicio') },
-      { k: '/ruta', d: 'Ruta desde cero (29 módulos)', run: go('#/ruta') },
+      { k: '/ruta', d: 'Ruta desde cero (32 módulos)', run: go('#/ruta') },
       { k: '/glosario', d: 'Glosario de términos', run: go('#/glosario') },
       { k: '/practica', d: 'Banco de preguntas', run: go('#/practica') },
       { k: '/labs', d: 'Labs: encuentra el fallo', run: go('#/labs') },
